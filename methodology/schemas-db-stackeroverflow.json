@@ -1,0 +1,1141 @@
+[{
+  "table_name": "badges",
+  "column_name": "id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "badges",
+  "column_name": "name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "badges",
+  "column_name": "date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "badges",
+  "column_name": "user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "badges",
+  "column_name": "class",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "badges",
+  "column_name": "tag_based",
+  "data_type": "BOOL",
+  "is_nullable": "YES"
+}, {
+  "table_name": "comments",
+  "column_name": "id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "comments",
+  "column_name": "text",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "comments",
+  "column_name": "creation_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "comments",
+  "column_name": "post_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "comments",
+  "column_name": "user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "comments",
+  "column_name": "user_display_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "comments",
+  "column_name": "score",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "post_history",
+  "column_name": "id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "post_history",
+  "column_name": "creation_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "post_history",
+  "column_name": "post_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "post_history",
+  "column_name": "post_history_type_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "post_history",
+  "column_name": "revision_guid",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "post_history",
+  "column_name": "user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "post_history",
+  "column_name": "text",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "post_history",
+  "column_name": "comment",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "post_links",
+  "column_name": "id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "post_links",
+  "column_name": "creation_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "post_links",
+  "column_name": "link_type_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "post_links",
+  "column_name": "post_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "post_links",
+  "column_name": "related_post_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_answers",
+  "column_name": "id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_answers",
+  "column_name": "title",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_answers",
+  "column_name": "body",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_answers",
+  "column_name": "accepted_answer_id",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_answers",
+  "column_name": "answer_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_answers",
+  "column_name": "comment_count",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_answers",
+  "column_name": "community_owned_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_answers",
+  "column_name": "creation_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_answers",
+  "column_name": "favorite_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_answers",
+  "column_name": "last_activity_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_answers",
+  "column_name": "last_edit_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_answers",
+  "column_name": "last_editor_display_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_answers",
+  "column_name": "last_editor_user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_answers",
+  "column_name": "owner_display_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_answers",
+  "column_name": "owner_user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_answers",
+  "column_name": "parent_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_answers",
+  "column_name": "post_type_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_answers",
+  "column_name": "score",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_answers",
+  "column_name": "tags",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_answers",
+  "column_name": "view_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_moderator_nomination",
+  "column_name": "id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_moderator_nomination",
+  "column_name": "title",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_moderator_nomination",
+  "column_name": "body",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_moderator_nomination",
+  "column_name": "accepted_answer_id",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_moderator_nomination",
+  "column_name": "answer_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_moderator_nomination",
+  "column_name": "comment_count",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_moderator_nomination",
+  "column_name": "community_owned_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_moderator_nomination",
+  "column_name": "creation_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_moderator_nomination",
+  "column_name": "favorite_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_moderator_nomination",
+  "column_name": "last_activity_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_moderator_nomination",
+  "column_name": "last_edit_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_moderator_nomination",
+  "column_name": "last_editor_display_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_moderator_nomination",
+  "column_name": "last_editor_user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_moderator_nomination",
+  "column_name": "owner_display_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_moderator_nomination",
+  "column_name": "owner_user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_moderator_nomination",
+  "column_name": "parent_id",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_moderator_nomination",
+  "column_name": "post_type_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_moderator_nomination",
+  "column_name": "score",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_moderator_nomination",
+  "column_name": "tags",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_moderator_nomination",
+  "column_name": "view_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_orphaned_tag_wiki",
+  "column_name": "id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_orphaned_tag_wiki",
+  "column_name": "title",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_orphaned_tag_wiki",
+  "column_name": "body",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_orphaned_tag_wiki",
+  "column_name": "accepted_answer_id",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_orphaned_tag_wiki",
+  "column_name": "answer_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_orphaned_tag_wiki",
+  "column_name": "comment_count",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_orphaned_tag_wiki",
+  "column_name": "community_owned_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_orphaned_tag_wiki",
+  "column_name": "creation_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_orphaned_tag_wiki",
+  "column_name": "favorite_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_orphaned_tag_wiki",
+  "column_name": "last_activity_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_orphaned_tag_wiki",
+  "column_name": "last_edit_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_orphaned_tag_wiki",
+  "column_name": "last_editor_display_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_orphaned_tag_wiki",
+  "column_name": "last_editor_user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_orphaned_tag_wiki",
+  "column_name": "owner_display_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_orphaned_tag_wiki",
+  "column_name": "owner_user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_orphaned_tag_wiki",
+  "column_name": "parent_id",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_orphaned_tag_wiki",
+  "column_name": "post_type_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_orphaned_tag_wiki",
+  "column_name": "score",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_orphaned_tag_wiki",
+  "column_name": "tags",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_orphaned_tag_wiki",
+  "column_name": "view_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_privilege_wiki",
+  "column_name": "id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_privilege_wiki",
+  "column_name": "title",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_privilege_wiki",
+  "column_name": "body",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_privilege_wiki",
+  "column_name": "accepted_answer_id",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_privilege_wiki",
+  "column_name": "answer_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_privilege_wiki",
+  "column_name": "comment_count",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_privilege_wiki",
+  "column_name": "community_owned_date",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_privilege_wiki",
+  "column_name": "creation_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_privilege_wiki",
+  "column_name": "favorite_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_privilege_wiki",
+  "column_name": "last_activity_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_privilege_wiki",
+  "column_name": "last_edit_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_privilege_wiki",
+  "column_name": "last_editor_display_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_privilege_wiki",
+  "column_name": "last_editor_user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_privilege_wiki",
+  "column_name": "owner_display_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_privilege_wiki",
+  "column_name": "owner_user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_privilege_wiki",
+  "column_name": "parent_id",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_privilege_wiki",
+  "column_name": "post_type_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_privilege_wiki",
+  "column_name": "score",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_privilege_wiki",
+  "column_name": "tags",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_privilege_wiki",
+  "column_name": "view_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_questions",
+  "column_name": "id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_questions",
+  "column_name": "title",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_questions",
+  "column_name": "body",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_questions",
+  "column_name": "accepted_answer_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_questions",
+  "column_name": "answer_count",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_questions",
+  "column_name": "comment_count",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_questions",
+  "column_name": "community_owned_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_questions",
+  "column_name": "creation_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_questions",
+  "column_name": "favorite_count",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_questions",
+  "column_name": "last_activity_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_questions",
+  "column_name": "last_edit_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_questions",
+  "column_name": "last_editor_display_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_questions",
+  "column_name": "last_editor_user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_questions",
+  "column_name": "owner_display_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_questions",
+  "column_name": "owner_user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_questions",
+  "column_name": "parent_id",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_questions",
+  "column_name": "post_type_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_questions",
+  "column_name": "score",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_questions",
+  "column_name": "tags",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_questions",
+  "column_name": "view_count",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki",
+  "column_name": "id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki",
+  "column_name": "title",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki",
+  "column_name": "body",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki",
+  "column_name": "accepted_answer_id",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki",
+  "column_name": "answer_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki",
+  "column_name": "comment_count",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki",
+  "column_name": "community_owned_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki",
+  "column_name": "creation_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki",
+  "column_name": "favorite_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki",
+  "column_name": "last_activity_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki",
+  "column_name": "last_edit_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki",
+  "column_name": "last_editor_display_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki",
+  "column_name": "last_editor_user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki",
+  "column_name": "owner_display_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki",
+  "column_name": "owner_user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki",
+  "column_name": "parent_id",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki",
+  "column_name": "post_type_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki",
+  "column_name": "score",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki",
+  "column_name": "tags",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki",
+  "column_name": "view_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki_excerpt",
+  "column_name": "id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki_excerpt",
+  "column_name": "title",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki_excerpt",
+  "column_name": "body",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki_excerpt",
+  "column_name": "accepted_answer_id",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki_excerpt",
+  "column_name": "answer_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki_excerpt",
+  "column_name": "comment_count",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki_excerpt",
+  "column_name": "community_owned_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki_excerpt",
+  "column_name": "creation_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki_excerpt",
+  "column_name": "favorite_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki_excerpt",
+  "column_name": "last_activity_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki_excerpt",
+  "column_name": "last_edit_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki_excerpt",
+  "column_name": "last_editor_display_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki_excerpt",
+  "column_name": "last_editor_user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki_excerpt",
+  "column_name": "owner_display_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki_excerpt",
+  "column_name": "owner_user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki_excerpt",
+  "column_name": "parent_id",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki_excerpt",
+  "column_name": "post_type_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki_excerpt",
+  "column_name": "score",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki_excerpt",
+  "column_name": "tags",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_tag_wiki_excerpt",
+  "column_name": "view_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_wiki_placeholder",
+  "column_name": "id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_wiki_placeholder",
+  "column_name": "title",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_wiki_placeholder",
+  "column_name": "body",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_wiki_placeholder",
+  "column_name": "accepted_answer_id",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_wiki_placeholder",
+  "column_name": "answer_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_wiki_placeholder",
+  "column_name": "comment_count",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_wiki_placeholder",
+  "column_name": "community_owned_date",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_wiki_placeholder",
+  "column_name": "creation_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_wiki_placeholder",
+  "column_name": "favorite_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_wiki_placeholder",
+  "column_name": "last_activity_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_wiki_placeholder",
+  "column_name": "last_edit_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_wiki_placeholder",
+  "column_name": "last_editor_display_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_wiki_placeholder",
+  "column_name": "last_editor_user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_wiki_placeholder",
+  "column_name": "owner_display_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_wiki_placeholder",
+  "column_name": "owner_user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_wiki_placeholder",
+  "column_name": "parent_id",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_wiki_placeholder",
+  "column_name": "post_type_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_wiki_placeholder",
+  "column_name": "score",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_wiki_placeholder",
+  "column_name": "tags",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "posts_wiki_placeholder",
+  "column_name": "view_count",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "stackoverflow_posts",
+  "column_name": "id",
+  "data_type": "INT64",
+  "is_nullable": "NO"
+}, {
+  "table_name": "stackoverflow_posts",
+  "column_name": "title",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "stackoverflow_posts",
+  "column_name": "body",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "stackoverflow_posts",
+  "column_name": "accepted_answer_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "stackoverflow_posts",
+  "column_name": "answer_count",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "stackoverflow_posts",
+  "column_name": "comment_count",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "stackoverflow_posts",
+  "column_name": "community_owned_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "stackoverflow_posts",
+  "column_name": "creation_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "stackoverflow_posts",
+  "column_name": "favorite_count",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "stackoverflow_posts",
+  "column_name": "last_activity_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "stackoverflow_posts",
+  "column_name": "last_edit_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "stackoverflow_posts",
+  "column_name": "last_editor_display_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "stackoverflow_posts",
+  "column_name": "last_editor_user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "stackoverflow_posts",
+  "column_name": "owner_display_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "stackoverflow_posts",
+  "column_name": "owner_user_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "stackoverflow_posts",
+  "column_name": "parent_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "stackoverflow_posts",
+  "column_name": "post_type_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "stackoverflow_posts",
+  "column_name": "score",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "stackoverflow_posts",
+  "column_name": "tags",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "stackoverflow_posts",
+  "column_name": "view_count",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "tags",
+  "column_name": "id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "tags",
+  "column_name": "tag_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "tags",
+  "column_name": "count",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "tags",
+  "column_name": "excerpt_post_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "tags",
+  "column_name": "wiki_post_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "users",
+  "column_name": "id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "users",
+  "column_name": "display_name",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "users",
+  "column_name": "about_me",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "users",
+  "column_name": "age",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "users",
+  "column_name": "creation_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "users",
+  "column_name": "last_access_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "users",
+  "column_name": "location",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "users",
+  "column_name": "reputation",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "users",
+  "column_name": "up_votes",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "users",
+  "column_name": "down_votes",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "users",
+  "column_name": "views",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "users",
+  "column_name": "profile_image_url",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "users",
+  "column_name": "website_url",
+  "data_type": "STRING",
+  "is_nullable": "YES"
+}, {
+  "table_name": "votes",
+  "column_name": "id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "votes",
+  "column_name": "creation_date",
+  "data_type": "TIMESTAMP",
+  "is_nullable": "YES"
+}, {
+  "table_name": "votes",
+  "column_name": "post_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}, {
+  "table_name": "votes",
+  "column_name": "vote_type_id",
+  "data_type": "INT64",
+  "is_nullable": "YES"
+}]

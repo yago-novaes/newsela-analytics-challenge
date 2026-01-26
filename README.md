@@ -89,6 +89,8 @@ We observed distinct stages of the technology adoption lifecycle:
     * **2012:** 2.63 answers/question | **72.1%** approval rate.
     * **2022:** 1.26 answers/question | **35.4%** approval rate.
 * **dbt (Adoption/Hype Phase):** Being a newer tool (data starts ~2020), dbt shows early volatility. The approval rate dropped from **41.9%** (2020) to **27.9%** (2022), suggesting a recent influx of beginners still learning to formulate good questions (the "Eternal September" effect).
+* **Note on Data Scope:** adhering strictly to the prompt's requirement ("tagged with only python"), I excluded posts with combined tags (e.g., python|pandas). It is worth noting that this strict filtering isolates generic/beginner questions and excludes a significant portion of the specialized Python ecosystem, potentially influencing the approval rate comparison against dbt.
+
 
 ### Q3: Behavioral Quality Drivers
 > **3. Other than tags, what qualities on a post correlate with the highest rate of answer and approved answer? Feel free to get creative.**

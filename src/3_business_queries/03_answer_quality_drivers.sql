@@ -48,8 +48,8 @@ with posts_questions as (
         
         -- pool 1
         case 
-            -- unclear/short title
-            when char_length(title) < 15 then '1. bad title (too short)'
+            -- unclear/short title - 35 derived from P10 distribution analysis
+            when char_length(title) < 35 then '1. bad title (too short)'
             
             -- desperate/unprofessional title
             when regexp_contains(lower(title), r'urgent|help|asap|!!!') then '2. desperate title (unprofessional)'
@@ -57,8 +57,8 @@ with posts_questions as (
             -- wall of text (readability)
             when body not like '%<code>%' then '3. no code formatting (wall of text)' 
             
-            -- length friction
-            when char_length(body) > 5000 then '4. too long (tl;dr)'
+            -- length friction - 5300 P95 distribution analysis
+            when char_length(body) > 5300 then '4. too long (tl;dr)'
             when char_length(body) < 200 then '5. too short (vague)'
             
             else '6. balanced (sweet spot)'

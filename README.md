@@ -26,7 +26,7 @@ I identified a clear paradigm shift between the original database and BigQuery:
 **Architectural Decision:** This fragmentation facilitates analytical queries. I opted to focus the study on the `posts_questions` table to avoid unnecessary *fan-out* when joining with answers, focusing instead on the intrinsic qualities of the question itself.
 
 ### 3. Data Quality & Profiling
-I performed data quality tests (`src/2_data_profiling/check_integrity_post_questions.sql`) prior to coding business rules. My goal is to not solve problems that don't exist.
+I performed data quality checks scripts (`src/2_data_profiling/check_integrity_post_questions.sql`) prior to coding business rules. My goal is to not solve problems that don't exist.
 * **PK Integrity:** Validated the uniqueness and non-nullability of IDs.
 * **Tag Formatting:** Checked for "dirty" tags (e.g., `|dbt|` vs `dbt`).
     * *Result:* The dataset is already clean (only `tag` or `tag1|tag2`).
@@ -49,13 +49,14 @@ The queries adhere to the **dbt Labs SQL Style Guide**, the industry standard fo
 ├── README.md                                # Project documentation
 ├── diagrams/
 │   ├── stackoverflow-dbdiagram.jpg          # Entity-Relationship Diagram (ERD) image
-│   └── schemas-db-stackoverflow.json      # DBML/JSON Schema definition
+│   └── schemas-db-stackoverflow.json        # DBML/JSON Schema definition
 ├── src/
 │   ├── 1_schema_extraction/
 │   │   └── information_schema.sql           # Script to extract metadata from BigQuery
 │   ├── 2_data_profiling/
 │   │   ├── check_integrity_post_questions.sql # PK and data quality validation
 │   │   └── recreate_partition.sql           # (Conceptual) DDL for partitioning strategy
+│   │   └── length_distributions.sql         # Determine statistical thresholds for Q3
 │   └── 3_business_queries/
 │       ├── 01_tag_analysis.sql              # Q1: Tag volume & approval rates
 │       ├── 02_python_vs_dbt_yoy.sql         # Q2: YoY Trends Analysis
@@ -89,26 +90,26 @@ We observed distinct stages of the technology adoption lifecycle:
     * **2012:** 2.63 answers/question | **72.1%** approval rate.
     * **2022:** 1.26 answers/question | **35.4%** approval rate.
 * **dbt (Adoption/Hype Phase):** Being a newer tool (data starts ~2020), dbt shows early volatility. The approval rate dropped from **41.9%** (2020) to **27.9%** (2022), suggesting a recent influx of beginners still learning to formulate good questions (the "Eternal September" effect).
-* **Note on Data Scope:** adhering strictly to the prompt's requirement ("tagged with only python"), I excluded posts with combined tags (e.g., python|pandas). It is worth noting that this strict filtering isolates generic/beginner questions and excludes a significant portion of the specialized Python ecosystem, potentially influencing the approval rate comparison against dbt.
-
+* **Note on Data Scope:** adhering strictly to the prompt's requirement ("tagged with only python"), I excluded posts with combined tags (e.g., `python|pandas`). It is worth noting that this strict filtering isolates generic/beginner questions and excludes a significant portion of the specialized Python ecosystem, potentially influencing the approval rate comparison against dbt.
 
 ### Q3: Behavioral Quality Drivers
 > **3. Other than tags, what qualities on a post correlate with the highest rate of answer and approved answer? Feel free to get creative.**
 
 I applied **Feature Engineering** to measure cognitive friction and context. The data confirmed three critical behaviors:
 
-* **Readability is King:** Questions without code formatting (`no code formatting`) are statistically fatal, with only **18.0%** approval on weekdays. The "Wall of Text" format is the biggest barrier to success.
-* **Professionalism Pays Off:** Titles with a desperate tone (containing "URGENT", "HELP", "ASAP") correlate with a **24.4%** approval rate, significantly lower than the balanced/neutral "Sweet Spot" (**33.6%**).
-* **The "Weekend Warrior" Effect:** Contrary to corporate intuition, questions posted on **weekends** achieve consistently higher success rates than weekdays. For example, "balanced" questions hit **35.4%** approval on weekends vs **33.6%** on weekdays. The data suggests a lower noise-to-signal ratio and higher availability of experts during off-hours.
+* **Readability is King:** Questions without code formatting (`no code formatting`) are statistically fatal, with only **18.1%** approval on weekdays. The "Wall of Text" format is the biggest barrier to success.
+* **Professionalism Pays Off:** Titles with a desperate tone (containing "URGENT", "HELP", "ASAP") correlate with a **24.2%** approval rate, significantly lower than the balanced/neutral "Sweet Spot" (**33.5%**).
+* **The "Weekend Warrior" Effect:** Contrary to corporate intuition, questions posted on **weekends** achieve consistently higher success rates than weekdays. For example, "balanced" questions hit **35.4%** approval on weekends vs **33.5%** on weekdays. The data suggests a lower noise-to-signal ratio and higher availability of experts during off-hours.
 
 ---
+
 ## Technical Approach & Architectural Decisions
 
 This section details the engineering decisions behind each query, focusing on performance optimization, maintainability, and cost reduction.
 
 ### Q1: Tag Analysis (Set Operations)
-
 My approach focused on transforming semi-structured string data into analytical metrics through a multi-step pipeline:
+
 1.  **Data Isolation (CTE):** First, I built the `post_questions` CTE to filter the raw table down to the specific date range and relevant columns immediately. This enforces "Predicate Pushdown," ensuring subsequent steps process only the necessary data.
 2.  **Array Flattening:** Since tags are stored as pipe-separated strings (e.g., `python|pandas`), I used `UNNEST(SPLIT())` in the `flat_tag` CTE. This normalization step transforms the 1:N relationship into 1:1 rows, allowing for precise individual tag aggregation.
 3.  **Dual Aggregation Strategy:** I created two parallel analysis paths:
@@ -118,12 +119,12 @@ My approach focused on transforming semi-structured string data into analytical 
 
 * **Optimization (Block Pruning):** I prioritized `creation_date BETWEEN 'start' AND 'end'` over `EXTRACT(YEAR from creation_date) = 2022`. Even on non-partitioned tables, this syntax allows BigQuery to leverage metadata caching and potential clustering (**Block Pruning**), whereas wrapping a column in a function (`EXTRACT`) forces a full column scan.
 * **Unified Reporting:** Instead of running separate queries, I utilized `UNION ALL` to consolidate all analytical perspectives (Most Answered, Highest Approval, Least Approval, Combinations) into a single result set. This reduces the overhead of establishing multiple connections and simplifies the consumption layer (Dashboard/CSV).
-* **Engineering Trade-off (Performance vs. DRY):** I initially explored a DRY (Don't Repeat Yourself) approach using Window Functions to generate all rankings in a single pass. However, benchmarking revealed that for this specific dataset size, the overhead of sorting (CPU intensive) outweighed the cost of multiple columnar scans (I/O intensive). The UNION ALL approach proved to be 14x more efficient in slot time usage (13s vs 181s), leading me to prioritize execution efficiency over syntactic elegance.
+* **Engineering Trade-off (Performance vs. DRY):** I initially explored a DRY (Don't Repeat Yourself) approach using Window Functions to generate all rankings in a single pass. However, benchmarking revealed that for this specific dataset size, the overhead of sorting (CPU intensive) outweighed the cost of multiple columnar scans (I/O intensive). The `UNION ALL` approach proved to be **14x more efficient** in slot time usage (13s vs 181s), leading me to prioritize execution efficiency over syntactic elegance.
 * **Noise Reduction:** Applied a strict `HAVING total_questions > 1000` filter to ensure statistical significance, filtering out "long-tail" tags that would skew the quality analysis.
 
 ### Q2: YoY Trends (Defensive SQL)
-
 To analyze trends over time without complex self-joins, I relied on window functions:
+
 1.  **Scoped Filtering:** I started by filtering the dataset strictly for 'python' and 'dbt' tags. This removes noise early and creates a clean baseline for comparison.
 2.  **Annual Bucketing:** I aggregated the metrics by `year` and `tag` to establish the base performance indicators (Question-to-Answer Ratio and Approval Rate).
 3.  **Growth Calculation (LAG):** Instead of joining the table to itself to compare years (which is expensive), I used the `LAG()` window function partitioned by tag and ordered by year. This allows the query to efficiently "look back" at the previous row (`year - 1`) to calculate the Year-Over-Year percentage change dynamically.
@@ -133,9 +134,7 @@ To analyze trends over time without complex self-joins, I relied on window funct
 * **Metric Integrity:** Handled the "First Year" problem in Year-Over-Year (YoY) calculations using `NULLIF` and logic to return `null` instead of `0`. Returning `0` for the first year would be mathematically incorrect (implying 0% growth rather than undefined growth).
 
 ### Q3: Quality Drivers (Feature Engineering)
-
 For this analysis, I shifted from a pure data perspective to a **Product/UX mindset**. I asked myself: *"As a Stack Overflow user, what friction points prevent me from answering a question?"*
-
 This led to a hypothesis-driven approach rather than just querying available columns:
 
 1.  **Hypothesis Generation:**
@@ -155,6 +154,12 @@ This led to a hypothesis-driven approach rather than just querying available col
     To simplify the analysis, I grouped the hypotheses into two distinct buckets:
     * **Pool 1: Cognitive Load & Readability (Effort Friction):** Combined factors like Body Length, formatting (presence of `<code>` tags), and Title Quality.
     * **Pool 2: Availability (Context):** Isolated the `Day of Week` to test the visibility hypothesis (Weekend vs. Weekday).
+
+5.  **Avoiding Magic Numbers (Data Profiling):**
+    Instead of arbitrarily defining what constitutes a "short title" or "long body", I executed a profiling script (`src/2_data_profiling/length_distributions.sql`) to analyze the distribution of character counts in the 2022 dataset.
+    * **Short Title (< 35 chars):** Corresponds to the **P10** threshold. My initial guess was 15 chars, but profiling revealed the absolute minimum title length is 15, meaning a rule of `< 15` would have captured zero data. Data profiling corrected this logic error.
+    * **Long Body (> 5300 chars):** Corresponds to the **P95** threshold (top 5% of longest questions), identifying extreme "Wall of Text" outliers that statistically discourage engagement.
+    * *Note: These statistical thresholds were used to calibrate the constants in the `03_answer_quality_drivers.sql` query.*
 
 ---
 

@@ -105,11 +105,26 @@ I applied **Feature Engineering** to measure cognitive friction and context. The
 This section details the engineering decisions behind each query, focusing on performance optimization, maintainability, and cost reduction.
 
 ### Q1: Tag Analysis (Set Operations)
+
+My approach focused on transforming semi-structured string data into analytical metrics through a multi-step pipeline:
+1.  **Data Isolation (CTE):** First, I built the `post_questions` CTE to filter the raw table down to the specific date range and relevant columns immediately. This enforces "Predicate Pushdown," ensuring subsequent steps process only the necessary data.
+2.  **Array Flattening:** Since tags are stored as pipe-separated strings (e.g., `python|pandas`), I used `UNNEST(SPLIT())` in the `flat_tag` CTE. This normalization step transforms the 1:N relationship into 1:1 rows, allowing for precise individual tag aggregation.
+3.  **Dual Aggregation Strategy:** I created two parallel analysis paths:
+    * *Individual Tags:* Aggregated the flattened data to rank tags by volume and approval rate.
+    * *Combinations:* Queried the raw string patterns (without unnesting) to identify "tech stacks" that work well together (e.g., `python|pandas|dataframe`).
+4.  **Unified Output:** Finally, I used `UNION ALL` to stitch together four distinct analytical views (Volume, High Quality, Low Quality, Combinations) into a single report, simplifying the consumption layer.
+
 * **Optimization (Block Pruning):** I prioritized `creation_date BETWEEN 'start' AND 'end'` over `EXTRACT(YEAR from creation_date) = 2022`. Even on non-partitioned tables, this syntax allows BigQuery to leverage metadata caching and potential clustering (**Block Pruning**), whereas wrapping a column in a function (`EXTRACT`) forces a full column scan.
 * **Unified Reporting:** Instead of running 4 separate queries, I utilized `UNION ALL` to consolidate all analytical perspectives (Most Answered, Highest Approval, Least Approval, Combinations) into a single result set. This reduces the overhead of establishing multiple connections and simplifies the consumption layer (Dashboard/CSV).
 * **Noise Reduction:** Applied a strict `HAVING total_questions > 1000` filter to ensure statistical significance, filtering out "long-tail" tags that would skew the quality analysis.
 
 ### Q2: YoY Trends (Defensive SQL)
+
+To analyze trends over time without complex self-joins, I relied on window functions:
+1.  **Scoped Filtering:** I started by filtering the dataset strictly for 'python' and 'dbt' tags. This removes noise early and creates a clean baseline for comparison.
+2.  **Annual Bucketing:** I aggregated the metrics by `year` and `tag` to establish the base performance indicators (Question-to-Answer Ratio and Approval Rate).
+3.  **Growth Calculation (LAG):** Instead of joining the table to itself to compare years (which is expensive), I used the `LAG()` window function partitioned by tag and ordered by year. This allows the query to efficiently "look back" at the previous row (`year - 1`) to calculate the Year-Over-Year percentage change dynamically.
+
 * **Dynamic Time Windows:** Implemented `DECLARE` variables for the target year. In a production environment (dbt), these would be replaced by `{{ var('target_year') }}`, allowing the model to run incrementally without code changes.
 * **Defensive Aggregation:** I enforced explicit column names in the `GROUP BY` clause (`group by post_year, tag`) instead of positional references (`group by 1, 2`). While positional grouping is faster to write, it is fragile in production pipelines if the `SELECT` clause order changes.
 * **Metric Integrity:** Handled the "First Year" problem in Year-Over-Year (YoY) calculations using `NULLIF` and logic to return `null` instead of `0`. Returning `0` for the first year would be mathematically incorrect (implying 0% growth rather than undefined growth).

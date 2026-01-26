@@ -1,4 +1,4 @@
-# Newsela Analytics Engineering Challenge
+# Newsela Analytics Engineering Challenge 
 
 ## Overview
 Welcome to my submission for the Senior Analytics Engineering Take-Home Challenge. The goal was to analyze Stack Overflow public data to uncover engagement drivers, mimicking the complexity of handling large-scale educational data.

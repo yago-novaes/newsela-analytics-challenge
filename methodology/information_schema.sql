@@ -2,8 +2,8 @@ select
     table_name,
     column_name,
     data_type,
-    is_nullable
-from `bigquery-public-data.stackoverflow.INFORMATION_SCHEMA.COLUMNS`
+    is_nullableublic
+from `bigquery-p-data.stackoverflow.INFORMATION_SCHEMA.COLUMNS`
 where table_name in (
     'badges',
     'comments',

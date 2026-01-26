@@ -100,6 +100,45 @@ I applied **Feature Engineering** to measure cognitive friction and context. The
 * **The "Weekend Warrior" Effect:** Contrary to corporate intuition, questions posted on **weekends** achieve consistently higher success rates than weekdays. For example, "balanced" questions hit **35.4%** approval on weekends vs **33.6%** on weekdays. The data suggests a lower noise-to-signal ratio and higher availability of experts during off-hours.
 
 ---
+## Technical Approach & Architectural Decisions
+
+This section details the engineering decisions behind each query, focusing on performance optimization, maintainability, and cost reduction.
+
+### Q1: Tag Analysis (Set Operations)
+* **Optimization (Block Pruning):** I prioritized `creation_date BETWEEN 'start' AND 'end'` over `EXTRACT(YEAR from creation_date) = 2022`. Even on non-partitioned tables, this syntax allows BigQuery to leverage metadata caching and potential clustering (**Block Pruning**), whereas wrapping a column in a function (`EXTRACT`) forces a full column scan.
+* **Unified Reporting:** Instead of running 4 separate queries, I utilized `UNION ALL` to consolidate all analytical perspectives (Most Answered, Highest Approval, Least Approval, Combinations) into a single result set. This reduces the overhead of establishing multiple connections and simplifies the consumption layer (Dashboard/CSV).
+* **Noise Reduction:** Applied a strict `HAVING total_questions > 1000` filter to ensure statistical significance, filtering out "long-tail" tags that would skew the quality analysis.
+
+### Q2: YoY Trends (Defensive SQL)
+* **Dynamic Time Windows:** Implemented `DECLARE` variables for the target year. In a production environment (dbt), these would be replaced by `{{ var('target_year') }}`, allowing the model to run incrementally without code changes.
+* **Defensive Aggregation:** I enforced explicit column names in the `GROUP BY` clause (`group by post_year, tag`) instead of positional references (`group by 1, 2`). While positional grouping is faster to write, it is fragile in production pipelines if the `SELECT` clause order changes.
+* **Metric Integrity:** Handled the "First Year" problem in Year-Over-Year (YoY) calculations using `NULLIF` and logic to return `null` instead of `0`. Returning `0` for the first year would be mathematically incorrect (implying 0% growth rather than undefined growth).
+
+### Q3: Quality Drivers (Feature Engineering)
+
+For this analysis, I shifted from a pure data perspective to a **Product/UX mindset**. I asked myself: *"As a Stack Overflow user, what friction points prevent me from answering a question?"*
+
+This led to a hypothesis-driven approach rather than just querying available columns:
+
+1.  **Hypothesis Generation:**
+    * *Is it too long?* (Body length friction)
+    * *Is it a "wall of text"?* (Readability/No code blocks)
+    * *Is the title desperate?* (Unprofessional tone like "URGENT", "HELP")
+    * *Did I miss it?* (Posting time/Visibility)
+
+2.  **Architectural Decision (Cost & Performance):**
+    * I deliberately opted **not** to join `posts_questions` with `posts_answers`.
+    * **Reasoning:** Joining a question to its answers causes **row fan-out** (1 question -> N answers). This would inflate compute costs and require complex re-aggregation without adding value to the analysis of the *question's* structural quality. I focused strictly on the "input" (the question) to predict the "output" (success metrics).
+
+3.  **Scope Definition (Discarded Hypotheses):**
+    * I discarded the hypothesis "Is the question too difficult?" because measuring technical difficulty is subjective and would require NLP/Text Analysis, which is out of scope for a pure SQL approach.
+
+4.  **Feature Pools:**
+    To simplify the analysis, I grouped the hypotheses into two distinct buckets:
+    * **Pool 1: Cognitive Load & Readability (Effort Friction):** Combined factors like Body Length, formatting (presence of `<code>` tags), and Title Quality.
+    * **Pool 2: Availability (Context):** Isolated the `Day of Week` to test the visibility hypothesis (Weekend vs. Weekday).
+
+---
 
 ## Future Improvements
 

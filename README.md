@@ -14,7 +14,7 @@ To optimize the time spent understanding the data model:
 
 This reinforces the importance of documentation, lineage, and well-maintained catalogs. Visualizing the diagram allowed me to quickly identify keys and relationships.
 
-![Stack Overflow Schema](diagrams/stackoverflow-dbdiagram.jpg)
+![Stack Overflow Schema](diagrams/stackoverflow-dbdiagram.png)
 
 ### 2. Architectural Analysis: OLTP vs. OLAP
 To ensure JOIN integrity, I consulted the [official Stack Exchange Data Explorer (SEDE) documentation](https://meta.stackexchange.com/questions/2677/database-schema-documentation-for-the-public-data-dump-and-sede/2678#2678).

@@ -4,7 +4,7 @@
 
 declare target_year int64 default extract(year from current_date());
 
--- the dataset is outdated, therefore the last treatment year is 2022, but otherwise i would use the solution below declaring from current_date(), which is much more optimized and cheaper than extracting some column within the dataset.
+-- the dataset is outdated, therefore the last treatment year is 2022, but otherwise i would use the solution below declaring from current_date(), which is much more optimized and cheaper than extracting some column within the dataset
 -- if was dbt we could create variables like this (next_month, last_quarter, etc.) and use them in our models
 
 with post_questions as (
@@ -17,9 +17,8 @@ with post_questions as (
   from 
     `bigquery-public-data.stackoverflow.posts_questions`
   where
-    --preferred 'between' over 'extract(year)' to enforce partition pruning.
-    -- even if the table is not partitioned, this enables 'block pruning' if the table is clustered by date.
-    -- fop
+    --preferred 'between' over 'extract(year)' to enforce partition pruning
+    -- even if the table is not partitioned, this enables 'block pruning' if the table is clustered by date
     creation_date between '2022-01-01' and '2022-12-31'
 
 )
@@ -67,6 +66,116 @@ with post_questions as (
 )
 
 -- self-service
-select * from combined_tags -- individual or combined
-order by approved_rate desc -- answers or approved in lead or last 
-limit 10
+--select * from combined_tags -- individual or combined
+--order by approved_rate desc -- answers or approved in lead or last 
+--limit 10
+
+,final_report as (
+-- final report: consolidating all perspectives into a single dataset using union all
+
+-- 1. individual tags: most answers
+(
+  select 
+    '1. individual - most answers' as category,
+    tag,
+    total_questions,
+    total_answers,
+    approved_rate
+  from individual_tag
+  order by total_answers desc
+  limit 5
+)
+
+union all
+
+(
+-- 2. individual tags: highest approved rate 
+  select 
+    '2. individual - highest approval' as category,
+    tag,
+    total_questions,
+    total_answers,
+    approved_rate
+  from individual_tag
+  order by approved_rate desc
+  limit 5
+)
+
+union all
+
+-- 3. individual tags: least approved rate
+(
+  select 
+    '3. individual - least approval' as category,
+    tag,
+    total_questions,
+    total_answers,
+    approved_rate
+  from individual_tag
+  order by approved_rate asc
+  limit 5
+)
+
+union all
+
+-- 4. tag combinations: highest approval
+(
+  select 
+    '4. combinations - highest approval' as category,
+    tag,
+    total_questions,
+    total_answers,
+    approved_rate
+  from combined_tags
+  order by approved_rate desc
+  limit 5
+)
+
+union all
+
+-- 5. tag combinations: least approval
+(
+  select 
+    '5. combinations - least approval' as category,
+    tag,
+    total_questions,
+    total_answers,
+    approved_rate
+  from combined_tags
+  order by approved_rate asc
+  limit 5
+)
+
+union all
+
+-- 6. tag combinations: most answers
+(
+  select 
+    '6. combinations - most answers' as category,
+    tag,
+    total_questions,
+    total_answers,
+    approved_rate
+  from combined_tags
+  order by total_answers desc
+  limit 5
+)
+
+union all
+
+-- 7. tag combinations: least answers
+(
+  select 
+    '7. combinations - least answers' as category,
+    tag,
+    total_questions,
+    total_answers,
+    approved_rate
+  from combined_tags
+  order by total_answers asc
+  limit 5
+)
+
+) 
+
+select * from final_report;

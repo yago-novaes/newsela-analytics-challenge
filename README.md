@@ -33,12 +33,12 @@ I performed data quality tests (`src/2_data_profiling/check_integrity_post_quest
     * *Impact:* I avoided the unnecessary use of expensive functions like `REGEXP_REPLACE` or `TRIM` inside loops, saving **slot time** in BigQuery.
 
 ### 4. Code Standards
-The queries follow a strict style guide to facilitate Code Reviews and Git diff reading:
-* Keywords in **lowercase**.
-* 4-space indentation.
-* Use of CTEs (Common Table Expressions) for modularity.
-* Explicit column names in `GROUP BY` (instead of positional numbers) for production robustness.
-* In-line comments explaining business decisions.
+The queries adhere to the **dbt Labs SQL Style Guide**, the industry standard for Analytics Engineering, to facilitate Code Reviews and Git diff reading:
+* **Keywords in lowercase:** Improves readability and consistency.
+* **4-space indentation:** Standard alignment for nested logic.
+* **CTEs (Common Table Expressions):** Used for modularity and readability (avoiding subqueries).
+* **Explicit column names in `GROUP BY`:** Favored over positional numbers (e.g., `1, 2`) to ensure production robustness against schema changes.
+* **In-line comments:** Explaining business decisions directly in the code.
 
 ---
 
@@ -71,36 +71,33 @@ The queries follow a strict style guide to facilitate Code Reviews and Git diff 
 
 ## Results & Insights (Data Analysis)
 
-### Q1: Specialists vs. Generalists (Tag Analysis)
-*Which tags lead to the most answers and what is the approval rate for the current year?*
+### Q1: Tag Performance & Ecosystems
+> **1. What tags on a Stack Overflow question lead to the most answers and the highest rate of approved answers for the current year? What tags lead to the least? How about combinations of tags?**
 
 The analysis revealed a clear dichotomy between generalist languages and niche tools.
 
-* **High Approval (Niche):** Text/data manipulation tools like `awk` (**66%**), `dplyr` (**64%**), and `sed` (**61%**) lead the quality ranking.
-    * *Insight:* Questions in these communities tend to be objective ("how to transform X into Y"), facilitating definitive, approved answers.
-* **Low Approval (Environment):** Tags related to external environments like `google-chrome-extension` (**12.8%**) and `browser` (**12.9%**) have the worst rates.
-    * *Insight:* Hard-to-reproduce problems ("it works on my machine") generate low resolutive engagement.
-* **The Power of the Python Ecosystem:** The combination `python|pandas|dataframe` maintains an impressive **57%** approval rate even with high volume, indicating an extremely healthy and well-documented community.
+* **Highest Approval (Niche Specialists):** Tools focused on data manipulation lead the ranking. `awk` (**66.0%**), `dplyr` (**64.2%**), and `sed` (**61.8%**) have the highest success rates. These communities deal with objective problems ("input -> output"), facilitating definitive answers.
+* **Least Approval (Environment Dependencies):** Tags related to external environments like `google-chrome-extension` (**12.9%**) and `browser` (**12.9%**) perform worst. These issues are often hard to reproduce ("it works on my machine"), leading to low engagement.
+* **Combinations (Synergy):** While generic tags struggle, specific combinations like `python|pandas|dataframe` maintain a high **58.0%** approval rate even with massive volume (4.5k+ questions), indicating a highly mature documentation ecosystem compared to generic `python` (**35.0%**).
 
-### Q2: Python Saturation & The Rise of dbt
-*Comparative analysis of maturity and trends (YoY).*
+### Q2: Technology Lifecycle (Python vs. dbt)
+> **2. For posts which are tagged with only ‘python’ or ‘dbt’, what is the year over year change of question-to-answer ratio for the last 10 years? How about the rate of approved answers on questions for the same time period? How do posts tagged with only ‘python’ compare to posts only tagged with ‘dbt’?**
 
-We observed the classic technology adoption lifecycle:
+We observed distinct stages of the technology adoption lifecycle:
 
-* **Python (Saturation):** Over 10 years, the ecosystem exploded in volume, but "attention" metrics dropped drastically.
-    * **2012:** Average of **2.63** answers/question and **72%** approval.
-    * **2022:** Average of **1.26** answers/question and **35%** approval.
-* **dbt (Early Adoption):** Incipient data (starting in 2020) shows the "hype cycle." The approval rate dropped from **41%** (2020) to **27%** (2022), suggesting a massive influx of beginners still learning how to formulate good questions about the tool.
+* **Python (Saturation Phase):** Over the last decade, Python transitioned from niche to mass-market. As volume exploded, "attention per question" diluted drastically:
+    * **2012:** 2.63 answers/question | **72.1%** approval rate.
+    * **2022:** 1.26 answers/question | **35.4%** approval rate.
+* **dbt (Adoption/Hype Phase):** Being a newer tool (data starts ~2020), dbt shows early volatility. The approval rate dropped from **41.9%** (2020) to **27.9%** (2022), suggesting a recent influx of beginners still learning to formulate good questions (the "Eternal September" effect).
 
-### Q3: Developer Psychology (Quality Drivers)
-*What makes a question get answered, other than the topic?*
+### Q3: Behavioral Quality Drivers
+> **3. Other than tags, what qualities on a post correlate with the highest rate of answer and approved answer? Feel free to get creative.**
 
 I applied **Feature Engineering** to measure cognitive friction and context. The data confirmed three critical behaviors:
 
-1.  **The "Wall of Text" is Fatal:** Questions without code formatting (`no code formatting`) have the worst performance in the entire dataset: only **17.9%** approval.
-2.  **Professionalism Pays Off:** Titles with a desperate tone (containing "URGENT", "HELP", "ASAP") have a **24%** approval rate, significantly lower than the balanced "Sweet Spot" (**33-35%**).
-3.  **The "Weekend Warrior" Effect:** In **all** analyzed categories, questions posted on weekends achieve higher success rates than those posted on weekdays (e.g., **35.4%** vs **33.5%** for balanced questions).
-    * *Hypothesis:* Lower noise (volume) and higher time availability from experts during weekends.
+* **Readability is King:** Questions without code formatting (`no code formatting`) are statistically fatal, with only **18.0%** approval on weekdays. The "Wall of Text" format is the biggest barrier to success.
+* **Professionalism Pays Off:** Titles with a desperate tone (containing "URGENT", "HELP", "ASAP") correlate with a **24.4%** approval rate, significantly lower than the balanced/neutral "Sweet Spot" (**33.6%**).
+* **The "Weekend Warrior" Effect:** Contrary to corporate intuition, questions posted on **weekends** achieve consistently higher success rates than weekdays. For example, "balanced" questions hit **35.4%** approval on weekends vs **33.6%** on weekdays. The data suggests a lower noise-to-signal ratio and higher availability of experts during off-hours.
 
 ---
 

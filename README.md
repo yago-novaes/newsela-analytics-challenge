@@ -49,7 +49,7 @@ The queries adhere to the **dbt Labs SQL Style Guide**, the industry standard fo
 ├── README.md                                # Project documentation
 ├── diagrams/
 │   ├── stackoverflow-dbdiagram.jpg          # Entity-Relationship Diagram (ERD) image
-│   └── schemas-db-stackeroverflow.json      # DBML/JSON Schema definition
+│   └── schemas-db-stackoverflow.json      # DBML/JSON Schema definition
 ├── src/
 │   ├── 1_schema_extraction/
 │   │   └── information_schema.sql           # Script to extract metadata from BigQuery

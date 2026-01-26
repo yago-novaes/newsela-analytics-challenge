@@ -1,0 +1,11 @@
+cognitive_load_bucket,day_type,total_questions,avg_answers,approved_rate_pct
+6. balanced (sweet spot),weekend,176488,0.91,35.43
+5. too short (vague),weekend,700,1.04,35.0
+6. balanced (sweet spot),weekday,762078,0.87,33.57
+5. too short (vague),weekday,2849,0.99,30.61
+4. too long (tl;dr),weekend,14228,0.73,29.59
+4. too long (tl;dr),weekday,56339,0.71,28.54
+2. desperate title (unprofessional),weekend,842,0.8,24.82
+2. desperate title (unprofessional),weekday,3372,0.76,24.38
+3. no code formatting (wall of text),weekend,42024,0.64,19.41
+3. no code formatting (wall of text),weekday,209868,0.61,17.99

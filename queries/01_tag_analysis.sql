@@ -17,6 +17,9 @@ with post_questions as (
   from 
     `bigquery-public-data.stackoverflow.posts_questions`
   where
+    --preferred 'between' over 'extract(year)' to enforce partition pruning.
+    -- even if the table is not partitioned, this enables 'block pruning' if the table is clustered by date.
+    -- fop
     creation_date between '2022-01-01' and '2022-12-31'
 
 )
@@ -43,7 +46,7 @@ with post_questions as (
     sum(answer_count) as total_answers,
     (count(accepted_answer_id) / count(id)) * 100 as approved_rate
   from flat_tag
-  group by 1
+  group by tag
   having total_questions > 1000 -- relevance
  
 )
@@ -52,13 +55,13 @@ with post_questions as (
   -- in this case i will consider only the questions that have more than one tag, and check the most answered
   -- for this part i couldn't use the flat_tag cte, even if exists the field tags, because this will multiply the metric results based on unnest lines.
   select
-    tags,
+    tags as tag,
     count(id) as total_questions,
     sum(answer_count) as total_answers,
     (count(accepted_answer_id) / count(id)) * 100 as approved_rate
   from post_questions
   where tags like '%|%'
-  group by 1
+  group by tag
   having total_questions > 1000
 
 )

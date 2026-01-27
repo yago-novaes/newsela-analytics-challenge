@@ -1,5 +1,5 @@
 -- Do not run now, just conceptual
-CREATE OR REPLACE TABLE `seu_projeto.sua_dataset.stg_posts_questions_partitioned`
+CREATE OR REPLACE TABLE `my_project.my_dataset.stg_posts_questions_partitioned`
 PARTITION BY DATE(creation_date)
 AS
 SELECT * FROM `bigquery-public-data.stackoverflow.posts_questions`

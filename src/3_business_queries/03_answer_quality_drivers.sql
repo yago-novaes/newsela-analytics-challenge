@@ -50,19 +50,19 @@ with posts_questions as (
         -- these allow us to measure interaction effects (e.g., short title AND no code)
         
         -- unclear/short title - 35 derived from P10 distribution analysis
-        case when char_length(title) < 35 then 1 else 0 end as is_short_title,
+        char_length(title) < 35 as is_short_title,
         
         -- desperate/unprofessional title
-        case when regexp_contains(lower(title), r'urgent|help|asap|!!!') then 1 else 0 end as is_desperate_title,
+        regexp_contains(lower(title), r'urgent|help|asap|!!!') = false as is_desperate_title,
         
         -- wall of text (readability)
-        case when body not like '%<code>%' then 1 else 0 end as has_no_code_block,
+        case when body not like '%<code>%' then true else false end as has_no_code_block,
         
         -- length friction - 5300 P95 distribution analysis
-        case when char_length(body) > 5300 then 1 else 0 end as is_too_long,
+        char_length(body) > 5300 as is_too_long,
         
         -- vague content
-        case when char_length(body) < 200 then 1 else 0 end as is_too_short,
+        char_length(body) < 200 as is_too_short,
 
         -- pool 2
         -- hypothesis 5

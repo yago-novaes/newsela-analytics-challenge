@@ -46,23 +46,23 @@ with posts_questions as (
         answer_count,
         accepted_answer_id,
         
-        -- pool 1
-        case 
-            -- unclear/short title - 35 derived from P10 distribution analysis
-            when char_length(title) < 35 then '1. bad title (too short)'
-            
-            -- desperate/unprofessional title
-            when regexp_contains(lower(title), r'urgent|help|asap|!!!') then '2. desperate title (unprofessional)'
-            
-            -- wall of text (readability)
-            when body not like '%<code>%' then '3. no code formatting (wall of text)' 
-            
-            -- length friction - 5300 P95 distribution analysis
-            when char_length(body) > 5300 then '4. too long (tl;dr)'
-            when char_length(body) < 200 then '5. too short (vague)'
-            
-            else '6. balanced (sweet spot)'
-        end as cognitive_load_bucket,
+        -- pool 1: structural quality flags (independent factors)
+        -- these allow us to measure interaction effects (e.g., short title AND no code)
+        
+        -- unclear/short title - 35 derived from P10 distribution analysis
+        case when char_length(title) < 35 then 1 else 0 end as is_short_title,
+        
+        -- desperate/unprofessional title
+        case when regexp_contains(lower(title), r'urgent|help|asap|!!!') then 1 else 0 end as is_desperate_title,
+        
+        -- wall of text (readability)
+        case when body not like '%<code>%' then 1 else 0 end as has_no_code_block,
+        
+        -- length friction - 5300 P95 distribution analysis
+        case when char_length(body) > 5300 then 1 else 0 end as is_too_long,
+        
+        -- vague content
+        case when char_length(body) < 200 then 1 else 0 end as is_too_short,
 
         -- pool 2
         -- hypothesis 5
@@ -78,7 +78,11 @@ with posts_questions as (
 metrics_consolidation as (
 
     select
-        cognitive_load_bucket,
+        is_short_title,
+        is_desperate_title,
+        has_no_code_block,
+        is_too_long,
+        is_too_short,
         day_type,
         count(id) as total_questions,
         avg(answer_count) as avg_answers, -- engagement volume
@@ -87,7 +91,11 @@ metrics_consolidation as (
     from 
         features_extraction
     group by 
-        cognitive_load_bucket,
+        is_short_title,
+        is_desperate_title,
+        has_no_code_block,
+        is_too_long,
+        is_too_short,
         day_type
 
 )
@@ -95,7 +103,11 @@ metrics_consolidation as (
 , final_metrics as (
 
     select 
-        cognitive_load_bucket,
+        is_short_title,
+        is_desperate_title,
+        has_no_code_block,
+        is_too_long,
+        is_too_short,
         day_type,
         total_questions,
         round(avg_answers, 2) as avg_answers,

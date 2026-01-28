@@ -1,13 +1,44 @@
-cognitive_load_bucket,day_type,total_questions,avg_answers,approved_rate_pct
-6. balanced (sweet spot),weekend,161300,0.91,35.43
-5. too short (vague),weekend,623,1.02,34.51
-6. balanced (sweet spot),weekday,698377,0.87,33.51
-1. bad title (too short),weekend,22017,0.88,31.54
-5. too short (vague),weekday,2494,0.99,30.83
-1. bad title (too short),weekday,94562,0.84,29.85
-4. too long (tl;dr),weekend,11835,0.73,29.35
-4. too long (tl;dr),weekday,47030,0.71,28.35
-2. desperate title (unprofessional),weekend,792,0.8,24.37
-2. desperate title (unprofessional),weekday,3186,0.76,24.2
-3. no code formatting (wall of text),weekend,37715,0.64,19.55
-3. no code formatting (wall of text),weekday,188857,0.61,18.13
+"is_short_title","is_desperate_title","has_no_code_block","is_too_long","is_too_short","day_type","total_questions","avg_answers","approved_rate_pct"
+0,1,0,0,1,"weekday",10,1.5,40
+1,0,0,0,1,"weekend",77,1.17,38.96
+1,1,0,0,0,"weekend",36,0.75,38.89
+0,0,0,0,0,"weekend",161300,0.91,35.43
+1,0,0,0,0,"weekend",16669,0.95,35.16
+0,0,0,0,1,"weekend",623,1.02,34.51
+1,0,0,0,0,"weekday",69608,0.92,33.88
+0,0,0,0,0,"weekday",698377,0.87,33.51
+1,1,0,1,0,"weekday",9,0.78,33.33
+1,1,0,0,0,"weekday",137,0.99,31.39
+0,0,0,0,1,"weekday",2494,0.99,30.83
+0,0,0,1,0,"weekend",11835,0.73,29.35
+1,0,0,0,1,"weekday",355,0.97,29.01
+0,0,0,1,0,"weekday",47030,0.71,28.35
+1,0,0,1,0,"weekday",3402,0.72,28.25
+1,0,0,1,0,"weekend",912,0.74,28.07
+0,1,0,1,0,"weekend",58,0.74,27.59
+0,1,0,0,0,"weekday",2273,0.82,27.14
+0,1,0,0,0,"weekend",574,0.88,26.66
+0,0,1,1,0,"weekday",354,0.64,25.42
+0,1,0,0,1,"weekend",4,1.25,25
+0,1,0,1,0,"weekday",221,0.74,23.98
+1,0,1,1,0,"weekday",24,0.5,20.83
+0,0,1,0,0,"weekend",33681,0.64,19.79
+0,0,1,0,0,"weekday",170163,0.61,18.38
+1,0,1,0,0,"weekend",3869,0.64,18.35
+1,1,1,0,0,"weekend",11,0.82,18.18
+0,0,1,0,1,"weekend",3963,0.68,17.66
+1,0,1,0,0,"weekday",19126,0.6,16.88
+1,0,1,0,1,"weekend",435,0.69,16.78
+0,1,1,0,0,"weekend",134,0.51,16.42
+0,0,1,0,1,"weekday",18340,0.63,15.68
+1,0,1,0,1,"weekday",1861,0.64,15.64
+0,1,1,0,0,"weekday",578,0.55,15.4
+1,1,1,0,0,"weekday",38,0.47,13.16
+0,0,1,1,0,"weekend",71,0.51,12.68
+0,1,1,0,1,"weekday",100,0.57,8
+0,1,1,0,1,"weekend",21,0.67,4.76
+1,1,1,0,1,"weekday",2,0,0
+1,0,1,1,0,"weekend",5,0.4,0
+1,1,1,0,1,"weekend",3,0,0
+0,1,1,1,0,"weekend",1,1,0
+0,1,1,1,0,"weekday",4,0.25,0

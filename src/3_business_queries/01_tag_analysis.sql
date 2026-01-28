@@ -54,7 +54,9 @@ with post_questions as (
   -- in this case i will consider only the questions that have more than one tag, and check the most answered
   -- for this part i couldn't use the flat_tag cte, even if exists the field tags, because this will multiply the metric results based on unnest lines.
   select
-    tags as tag,
+    -- Refactor: Normalized tag order to treat 'python|pandas' and 'pandas|python' as the same entity.
+    -- Logic: Split string into array -> Unnest -> Sort Alphabetically -> Rejoin string
+    (select string_agg(t, '|' order by t) from unnest(split(tags, '|')) t) as tag,
     count(id) as total_questions,
     sum(answer_count) as total_answers,
     (count(accepted_answer_id) / count(id)) * 100 as approved_rate

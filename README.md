@@ -97,10 +97,9 @@ We observed distinct stages of the technology adoption lifecycle:
 
 I applied **Feature Engineering** to measure cognitive friction and context. The data confirmed three critical behaviors:
 
-* **Readability is King:** Questions without code formatting (`no code formatting`) are statistically fatal, with only **18.1%** approval on weekdays. The "Wall of Text" format is the biggest barrier to success.
-* **Professionalism Pays Off:** Titles with a desperate tone (containing "URGENT", "HELP", "ASAP") correlate with a **24.2%** approval rate, significantly lower than the balanced/neutral "Sweet Spot" (**33.5%**).
+* **Readability is King:** Questions without code formatting (`has_no_code_block = 1`) are statistically fatal, with only **18.0%** approval on weekdays. The "Wall of Text" format is the biggest barrier to success.
+* **Professionalism Pays Off:** Titles with a desperate tone (containing "URGENT", "HELP", "ASAP") correlate with a **24.5%** approval rate, significantly lower than the balanced/neutral "Sweet Spot" (**33.5%**).
 * **The "Weekend Warrior" Effect:** Contrary to corporate intuition, questions posted on **weekends** achieve consistently higher success rates than weekdays. For example, "balanced" questions hit **35.4%** approval on weekends vs **33.5%** on weekdays. The data suggests a lower noise-to-signal ratio and higher availability of experts during off-hours.
-
 ---
 
 ## Technical Approach & Architectural Decisions
@@ -134,6 +133,12 @@ To analyze trends over time without complex self-joins, I relied on window funct
 * **Metric Integrity:** Handled the "First Year" problem in Year-Over-Year (YoY) calculations using `NULLIF` and logic to return `null` instead of `0`. Returning `0` for the first year would be mathematically incorrect (implying 0% growth rather than undefined growth).
 
 ### Q3: Quality Drivers (Feature Engineering)
+
+#### Engineering Evolution: Post-Review Refactor
+* **Initial Approach:** Originally, I used a sequential `CASE WHEN` logic to categorize posts into mutually exclusive buckets (e.g., "Short Title", "Wall of Text").
+* **Code Review Feedback:** Technical review highlighted a **"Waterfall Bias"**, where the first condition in the sequence would mask downstream issues (e.g., a post with *both* a short title and no formatting would only count as "Short Title").
+* **Current Architecture:** The logic was refactored to **Independent Boolean Flags**. This decoupled model allows for multi-factor analysis, accurately capturing the interaction effects between different friction points.
+
 For this analysis, I shifted from a pure data perspective to a **Product/UX mindset**. I asked myself: *"As a Stack Overflow user, what friction points prevent me from answering a question?"*
 This led to a hypothesis-driven approach rather than just querying available columns:
 
